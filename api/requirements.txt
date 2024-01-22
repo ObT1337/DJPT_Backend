@@ -3,4 +3,5 @@ mutagen
 sqlalchemy
 Flask-SQLAlchemy
 Flask-Migrate
+python-dotenv
 python-dateutil

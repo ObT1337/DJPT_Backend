@@ -22,22 +22,26 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-**/**/.venv/
-
+#Python
+venv
 *.pyc
 __pycache__/
 
+#flask-sql
 instance/
 
+#pytest
 .pytest_cache/
 .coverage
 htmlcov/
 
+#build
 dist/
 build/
 *.egg-info/gi
 
-/static/tracks
+#app
+**/static/tracks
 flaskDj/static/tracks/**
 **/migrations/*
 **/*.log

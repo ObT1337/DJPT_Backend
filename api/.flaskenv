@@ -1,0 +1,2 @@
+FLASK_APP=flaskDj
+FLASK_ENV=development
