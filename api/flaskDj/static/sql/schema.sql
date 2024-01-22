@@ -1,0 +1,27 @@
+DROP TABLE IF EXISTS tracks;
+
+CREATE TABLE tracks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title VARCHAR(255) NOT NULL,
+  artists VARCHAR(255) NOT NULL,
+  album VARCHAR(255),
+  duration TIME NOT NULL,
+  bpm INTEGER,
+  genre VARCHAR(255),
+  openKey VARCHAR(255),
+  musicalKey VARCHAR(255),
+  musicalKeySharps VARCHAR(255),
+  added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date TIMESTAMP,
+  playCount INTEGER DEFAULT 0,
+  fileLocation VARCHAR(2048) NOT NULL
+);
+
+DROP TABLE IF EXISTS playlists;
+
+CREATE TABLE playlists (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  library VARCHAR(64) NOT NULL,
+  libraryOrder INTEGER,
+  FOREIGN KEY (library) REFERENCES tracks (trackHash)
+);

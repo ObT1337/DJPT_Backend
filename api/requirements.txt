@@ -1,0 +1,6 @@
+Flask==2.3.0
+mutagen
+sqlalchemy
+Flask-SQLAlchemy
+Flask-Migrate
+python-dateutil
