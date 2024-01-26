@@ -2,8 +2,9 @@ import os
 
 from flask import Flask
 from flaskDj import manager
-from flaskDj.blueprints import main
+from flaskDj.blueprints import register_all_blueprints
 from flaskDj.commands import init_commands
+from flaskDj.service import DatabaseService
 
 
 def create_app(app: Flask, config_object="config.DevelopmentConfig"):
@@ -22,6 +23,7 @@ def create_app(app: Flask, config_object="config.DevelopmentConfig"):
     app.table_man = manager.TableManger(app)
     app.tracks_man = manager.TracksManager(app)
     app.playlist_man = manager.PlaylistManager(app)
+    app.db_service = DatabaseService(app)
 
     with app.app_context():
         # Create database tables
@@ -31,7 +33,7 @@ def create_app(app: Flask, config_object="config.DevelopmentConfig"):
 
         # Import and register blueprints
 
-        app.register_blueprint(main.bp)
+        register_all_blueprints(app)
 
         # Import and run commands
 

@@ -11,7 +11,9 @@ class Logger:
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
         self.ch = logging.StreamHandler()
         self.ch.setLevel(ch_level)
-        self.fh = logging.FileHandler(f"{self.dir_path}/debug.log")
+        self.fh = logging.FileHandler(
+            os.path.join(self.dir_path, "..", "logs", "debug.log")
+        )
         self.fh.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
             "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

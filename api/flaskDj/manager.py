@@ -112,7 +112,9 @@ class PlaylistManager(TableManger):
         pl_ex = self.playlist_exists(name)
         if not pl_ex:
             return f"Playlist {name} does not exists in the database."
-        self.delete(self.get_playlist(name))
+        playlist = self.get_playlist(name)
+        print(playlist.id)
+        self.delete(playlist)
         return f"Deleted playlist {name} to the database."
 
     def playlist_exists(self, name):
@@ -171,9 +173,25 @@ class PlaylistTracksManager(TableManger):
         # Otherwise, return the next available position
         return max_position + 1
 
-    def delete_tracks_from_playlist(self, playlist, track_ids):
+    def move_track(self, playlist, current_entry, new_position):
         from flaskDj.models import PlaylistTracks
 
+        # Get all that are above
+        q = self.session.query(PlaylistTracks)(
+            PlaylistTracks.playlist_id == playlist.id,
+            PlaylistTracks.position > current_entry.position,
+        )
+        above = self.session.query(q).all()
+        print(above)
+        # Get all that are beneath
+        q = self.session.query(PlaylistTracks)(
+            PlaylistTracks.playlist_id == playlist.id,
+            PlaylistTracks.position < current_entry.position,
+        )
+        beneath = self.session.query(q).all()
+        print(beneath)
+
+    def delete_tracks_from_playlist(self, playlist, track_ids):
         for tid in track_ids:
             track = self.get_track_entry(playlist.id, tid)
             self.delete(track)

@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+.cursor-pointer{
+  cursor:pointer;
+}
+.select-none{
+  user-select:none;
+}
+

@@ -99,12 +99,22 @@ class PlaylistTracksCommands:
     @staticmethod
     @click.command("delete-from")
     @click.argument("playlist")
-    @click.argument("track")
+    @click.argument("track_id")
     @with_appcontext
-    def delete_track_from_playlist(playlist: str, track: int):
+    def delete_track_from_playlist(playlist: str, track_id: int):
         """Import all files from directory."""
         service = DatabaseService(current_app)
-        log.debug(service.delete_tracks_from_playlist(playlist, track))
+        log.debug(service.delete_tracks_from_playlist(playlist, track_id))
+
+    @staticmethod
+    @click.command("move-to-pos")
+    @click.argument("playlist")
+    @click.argument("track_id")
+    @with_appcontext
+    def move_track_to_pos(playlist: str, track_id: int):
+        """Import all files from directory."""
+        service = DatabaseService(current_app)
+        log.debug(service.move_track_to_position(playlist, track_id))
 
 
 class TracksCommands:
@@ -123,6 +133,7 @@ def init_commands(app: Flask):
         PlaylistCommands.delete_playlist,
         PlaylistTracksCommands.add_track_to_playlist,
         PlaylistTracksCommands.delete_track_from_playlist,
+        PlaylistTracksCommands.move_track_to_pos,
     ]
     for cmd in commands:
         app.cli.add_command(cmd)

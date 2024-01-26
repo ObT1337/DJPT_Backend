@@ -22,6 +22,24 @@ class Tracks(db.Model):
     def __repr__(self):
         return f"<Track {self.artist}-{self.title}>"
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "artist": self.artist,
+            "album": self.album,
+            "duration": str(self.duration),
+            "bpm": self.bpm,
+            "genre": self.genre,
+            "openKey": self.openKey,
+            "musicalKey": self.musicalKey,
+            "musicalKeySharps": self.musicalKeySharps,
+            "added": self.added.strftime("%x"),
+            "date": self.date.strftime("%x"),
+            "playCount": self.playCount,
+            "fileLocation": self.fileLocation,
+        }
+
 
 class Playlists(db.Model):
     __tablename__ = "playlists"

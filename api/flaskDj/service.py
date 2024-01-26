@@ -73,3 +73,10 @@ class DatabaseService:
     def delete_tracks_from_playlist(self, playlist_name, *args, **kwargs):
         playlist = self.pl_manager.get_or_create_playlist(playlist_name)
         self.plt_manager.delete_tracks_from_playlist(playlist, *args, **kwargs)
+
+    def move_track_to_position(self, playlist_name, *args, **kwargs):
+        playlist = self.pl_manager.get_or_create_playlist(playlist_name)
+        self.plt_manager.move_track(playlist, *args, **kwargs)
+
+    def get_track(self, track_id):
+        return self.track_manager.get_entry_from_id(track_id)
